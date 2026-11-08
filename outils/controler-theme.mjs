@@ -332,6 +332,12 @@ for (const f of palette) {
     if (manque.length) faute(f, 0, "palette", `${mode} : jetons manquants (${manque.length}) : ${manque.join(", ")}`);
     const inconnus = [...page.keys()].filter((j) => jetonsFerme.length && !jetonsFerme.includes(j));
     if (inconnus.length) faute(f, 0, "palette", `${mode} : jetons hors de la liste fermée : ${inconnus.join(", ")}`);
+    const fond = page.get("--background")?.trim();
+    if (fond && !/^#[0-9a-f]{6}$/i.test(fond)) faute(f, 0, "palette", `${mode} : --background doit s'écrire en hexadécimal (#rrggbb) : la barre de Telegram prend cette couleur et n'accepte que ça`);
+    else if (fond && fiche?.couleurs) {
+      const cle = mode === "light" ? "clair" : "sombre", ecrit = fiche.couleurs[cle];
+      if (typeof ecrit === "string" && ecrit.toLowerCase() !== fond.toLowerCase()) faute(f, 0, "palette", `${mode} : « couleurs.${cle} » de theme.json (${ecrit}) doit être le --background de ta palette (${fond}) : c'est le fond montré pendant le chargement`);
+    }
     if (vignette) {
       const manqueV = jetonsFerme.filter((j) => !vignette.has(j));
       if (manqueV.length) faute(f, 0, "palette", `${mode} (vignette) : jetons manquants : ${manqueV.join(", ")}`);

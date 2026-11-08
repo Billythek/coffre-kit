@@ -64,6 +64,7 @@ Puis remplis `aurore/theme.json` :
 - `description` : **une phrase**, 120 caractères au plus, qui dit ce que ton thème a de particulier ;
 - `auteur` : `{ "nom": "…" }` (60 caractères au plus), et si tu veux `"lien": "https://…"` (une page à toi, en https) ;
 - `licence` : `MIT`, `Apache-2.0`, `BSD-3-Clause` ou `autre` (dans ce cas, explique-la dans l'issue) ;
+- `couleurs` : `{ "clair": "#rrggbb", "sombre": "#rrggbb" }`, les fonds de ta palette (`--background`), montrés pendant le chargement ;
 - `version` : `1.0.0` pour commencer (x.y.z) ; `contrat` et `pages` ne changent pas ; `id` est déjà posé.
 
 Le contrôle vérifie que ces champs sont là et bien formés.
@@ -87,7 +88,7 @@ Les types disent si tu utilises mal une donnée ; le contrôle dit si tu as enfr
 
 **Tes mots**, tous dans `textes.ts` (`fr`, `en`, `note`) : aucun texte écrit dans une vue. Le modèle donne déjà beaucoup de phrases toutes faites (le titre de l'Accueil, la ligne sous un savoir-faire…) : utilise-les.
 
-**Tes couleurs**, toutes dans `palette.css`, avec **tous** les jetons de `contrat/jetons.txt`, clair et sombre, sur la page **et** sur la vignette (le contrôle compare les deux). Les formes (`.module.css`) lisent ces jetons, jamais une couleur écrite en dur : ainsi ton thème suit le mode clair ou sombre.
+**Tes couleurs**, toutes dans `palette.css`, avec **tous** les jetons de `contrat/jetons.txt`, clair et sombre, sur la page **et** sur la vignette (le contrôle compare les deux). Écris `--background` en hexadécimal (`#rrggbb`) : la barre de Telegram prend cette couleur et n'accepte que ça ; reporte ses deux valeurs dans `couleurs` de `theme.json`. Les formes (`.module.css`) lisent ces jetons, jamais une couleur écrite en dur : ainsi ton thème suit le mode clair ou sombre.
 
 **Voir ton thème.** Ce dépôt ne fait pas tourner Coffre : tu travailles sur les types et les contrôles. Quand tu proposes ton thème (étape 6), **nous le faisons tourner** sur notre donnée de démonstration et nous te renvoyons les captures des dix pages, en clair et en sombre. (Un bac à sable pour voir ton thème chez toi serait la suite logique de ce kit.)
 

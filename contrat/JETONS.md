@@ -17,7 +17,7 @@ Le bloc « vignette » doit dire la même chose que le bloc « page » du même 
 
 ## Les paires mesurées
 
-Le contrôle mesure le contraste de ces paires, en clair et en sombre, sur la page. Un jeton à demi transparent (`rgb(… / .5)`) est mesuré posé sur son fond. Les couleurs doivent s'écrire en `#rrggbb`, `#rgb` ou `rgb()` pour être lues.
+Le contrôle mesure le contraste de ces paires, en clair et en sombre, sur la page. Un jeton à demi transparent (`rgb(… / .5)`) est mesuré posé sur son fond. Les couleurs doivent s'écrire en `#rrggbb`, `#rgb` ou `rgb()` pour être lues. **`--background` s'écrit obligatoirement en hexadécimal** (`#rrggbb`), en clair et en sombre : la barre de Telegram prend cette couleur et n'accepte que ça. Les mêmes deux valeurs vont dans `couleurs` de `theme.json` : c'est le fond montré pendant le chargement (le contrôle compare).
 
 - **4,5:1** (texte) : `--foreground` sur `--background` et `--surface` · `--text-soft`, `--text-secondary` sur `--surface` · `--text-muted`, `--text-faint` sur `--background` et `--surface` · `--accent-text` sur `--background` et `--surface` · `--accent-foreground` sur `--accent` · `--btn-main-ink` sur `--btn-main` et `--btn-main-press` · `--btn-ink` sur `--btn-face` · `--field-hint` sur `--field-face` · `--send-ink` sur `--send` · `--danger-foreground` sur `--danger` · `--success`, `--warning`, `--danger`, `--info` sur `--surface`.
 - **3:1** (repères, grands éléments) : `--switch-thumb-on` sur `--switch-on` · `--border-strong` sur `--background` et `--surface` · `--control-track` sur `--surface` et `--background`.

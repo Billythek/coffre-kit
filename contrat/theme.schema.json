@@ -17,7 +17,8 @@
     "captures",
     "origine",
     "empreinteRelue",
-    "dateRelecture"
+    "dateRelecture",
+    "couleurs"
   ],
   "properties": {
     "id": {
@@ -168,6 +169,25 @@
     "versionCoffre": {
       "type": "string",
       "description": "Premier commit de Coffre où il paraît (rempli à l'intégration)."
+    },
+    "couleurs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "clair",
+        "sombre"
+      ],
+      "properties": {
+        "clair": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "sombre": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        }
+      },
+      "description": "Palette en hexadécimal : le fond du thème en clair et en sombre (#rrggbb). Lue par la page de chargement et la barre de Telegram avant que le code du thème n’arrive : pas de clignotement."
     }
   }
 }

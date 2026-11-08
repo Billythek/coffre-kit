@@ -8,5 +8,6 @@
   "contrat": "1.0",
   "pages": ["accueil", "travail", "catalogue", "savoir", "personnalite", "routines", "programmer", "reglages", "agents", "compte"],
   "polices": [],
-  "apercu": "apercu.webp"
+  "apercu": "apercu.webp",
+  "couleurs": { "clair": "#EEF0F2", "sombre": "#101215" }
 }

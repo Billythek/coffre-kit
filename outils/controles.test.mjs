@@ -210,7 +210,13 @@ test("le contrôle voit les fautes de palette : un jeton oublié, une vignette d
   assert.match(r3.sortie, /--text-muted sur --surface fait/);
   const r4 = lancer(copie((d) => reecrire(d, "palette.css", (t) => t.replace(/--font-mono: /g, '--font-mono: "Ma Police", '))));
   assert.match(r4.sortie, /n'est servie par personne/);
-  for (const r of [r1, r2, r3, r4]) assert.equal(r.code, 1);
+  const r5 = lancer(copie((d) => reecrire(d, "palette.css", (t) => t.replace(/--background: #EEF0F2;/g, "--background: oklch(95% 0.005 250);"))));
+  assert.match(r5.sortie, /--background doit s'écrire en hexadécimal/);
+  const r6 = lancer(copie((d) => reecrire(d, "theme.json", (t) => t.replace(/"clair": "#[0-9A-Fa-f]{6}"/, '"clair": "#123456"'))));
+  assert.match(r6.sortie, /couleurs\.clair[^\n]*doit être le --background/);
+  const r7 = lancer(copie((d) => reecrire(d, "theme.json", (t) => t.replace(/,\s*"couleurs": \{[^}]*\}/, ""))));
+  assert.match(r7.sortie, /couleurs[^\n]*manque/);
+  for (const r of [r1, r2, r3, r4, r5, r6, r7]) assert.equal(r.code, 1);
 });
 
 test("le contrôle voit le jargon et le vouvoiement dans les mots, et une note manquante", () => {
