@@ -1,0 +1,90 @@
+/*
+ * Les styles du thème d'exemple, sobres et sans effet. Tout passe par les JETONS de Coffre (--background, --surface, --foreground, --accent…) :
+ * ainsi le thème suit tout seul le clair et le sombre, et tes couleurs à toi vivent dans palette.css, pas ici. Les valeurs après la virgule de
+ * var() ne servent qu'à regarder le thème hors de Coffre ; dans Coffre, les jetons sont toujours là.
+ *
+ * Ce que tu peux changer librement : formes, espaces, rayons, ombres, dégradés, halos (les effets sont libres). Ce que Coffre vérifie :
+ *  - toute durée est 140, 200 ou 240 ms (jamais une autre) ;
+ *  - tout mouvement est coupé quand la personne demande moins de mouvement (le bloc `prefers-reduced-motion` en bas) ;
+ *  - aucune adresse (pas de url(), pas de @import, pas de @font-face) : les polices sont celles de Coffre ;
+ *  - une cible tactile fait 44 px au moins ; un état n'est jamais dit par la couleur seule.
+ */
+
+.page { display: flex; flex-direction: column; gap: 16px; padding: 16px; min-height: 100%; color: var(--foreground, #1b1f24); background: var(--background, #f6f7f9); box-sizing: border-box; }
+.haut { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.titre { margin: 0; font: 600 24px/1.2 var(--font-display-title, system-ui, sans-serif); letter-spacing: -0.01em; }
+.titre:focus-visible { outline: 2px solid var(--accent, #2b5fc4); outline-offset: 4px; border-radius: 4px; }
+.cache { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.phrase { margin: -8px 0 0; color: var(--text-muted, #5a6470); font-size: 15px; line-height: 1.4; }
+.vide { margin: 0; color: var(--text-muted, #5a6470); font-size: 15px; line-height: 1.4; }
+.bloc { display: flex; flex-direction: column; gap: 12px; }
+
+/* Un groupe : intertitre en petites capitales, puis ses lignes. */
+.groupe { display: flex; flex-direction: column; gap: 8px; }
+.intertitre { margin: 0; color: var(--text-secondary, #46505b); font: var(--type-caps, 600 12px/1.3 system-ui, sans-serif); letter-spacing: 0.06em; text-transform: uppercase; list-style: none; }
+
+/* Les lignes, dans une carte. */
+.liste { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; background: var(--surface, #fff); border: 1px solid var(--border, #dde1e6); border-radius: 14px; overflow: hidden; }
+.carte { list-style: none; background: var(--surface, #fff); border: 1px solid var(--border, #dde1e6); border-radius: 14px; padding: 4px 12px; }
+.carte[data-ici] { border-color: var(--border-strong, #7b8591); }
+.carte summary { display: flex; align-items: center; gap: 12px; min-height: 56px; cursor: pointer; }
+.carte summary b { font-weight: 600; }
+.carte summary small { color: var(--text-muted, #5a6470); flex: 1; }
+.ligne { display: flex; align-items: center; gap: 8px; min-height: 56px; padding-right: 12px; border-top: 1px solid var(--border-subtle, #e8ebee); }
+.ligne:first-child { border-top: 0; }
+.ligne[data-attenuee] { opacity: 0.6; }
+.ligneBouton { flex: 1; display: flex; align-items: center; gap: 12px; min-height: 56px; padding: 8px 4px 8px 16px; background: none; border: 0; color: inherit; font: inherit; text-align: left; cursor: pointer; transition: background-color 140ms; }
+div.ligneBouton { cursor: default; }
+button.ligneBouton:hover { background: var(--surface-muted, #eef0f3); }
+.texte { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.texte b { font-weight: 600; }
+.texte small { color: var(--text-muted, #5a6470); font-size: 13px; line-height: 1.35; }
+.fin { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end; color: var(--text-secondary, #46505b); font-size: 14px; }
+.aller { color: var(--text-muted, #5a6470); font-size: 20px; }
+.agentLigne { display: flex; align-items: center; gap: 8px; }
+
+/* Un état : un point ET son mot. */
+.etat { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--text-secondary, #46505b); }
+.etat i { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.etat[data-ton="bon"] { color: var(--success, #0a6648); }
+.etat[data-ton="attention"] { color: var(--warning, #855300); }
+.etat[data-ton="danger"] { color: var(--danger, #a8153f); }
+
+/* Les boutons : le plein (un seul par page) et les autres. */
+.plein, .bouton, .retour { min-height: 44px; padding: 0 16px; border-radius: 12px; font: 600 15px/1 var(--font-ui, system-ui, sans-serif); cursor: pointer; transition: background-color 140ms, transform 140ms; }
+.plein { background: var(--btn-main, #2b5fc4); color: var(--btn-main-ink, #fff); border: 0; }
+.plein:hover:not(:disabled) { background: var(--btn-main-press, #234ea3); }
+.plein:active:not(:disabled) { transform: translateY(1px); }
+.bouton { background: transparent; color: var(--foreground, #1b1f24); border: 1px solid var(--btn-outline, #7b8591); align-self: flex-start; }
+.bouton:hover:not(:disabled) { background: var(--surface-muted, #eef0f3); }
+.retour { background: none; border: 0; color: var(--accent-text, #2b5fc4); padding: 0 8px 0 0; }
+.plein:disabled, .bouton:disabled { opacity: 0.55; cursor: default; }
+.plein:focus-visible, .bouton:focus-visible, .retour:focus-visible, .ligneBouton:focus-visible, .choix button:focus-visible, .carte summary:focus-visible { outline: 2px solid var(--accent, #2b5fc4); outline-offset: 2px; }
+
+/* Un choix parmi quelques-uns. */
+.choix { display: flex; flex-wrap: wrap; gap: 8px; }
+.choix button { min-height: 44px; padding: 0 14px; border-radius: 22px; border: 1px solid var(--btn-outline, #7b8591); background: transparent; color: var(--foreground, #1b1f24); font: 500 15px/1 var(--font-ui, system-ui, sans-serif); cursor: pointer; transition: background-color 140ms; }
+.choix button[aria-checked="true"] { background: var(--control-on, #1b1f24); color: var(--switch-thumb-on, #fff); border-color: transparent; }
+.choix small { opacity: 0.85; }
+
+/* Un champ. */
+.champ { display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: var(--text-secondary, #46505b); }
+.champ input, .champ select { min-height: 44px; padding: 0 12px; border-radius: 12px; border: 1px solid var(--border-strong, #7b8591); background: var(--field-face, #fff); color: var(--foreground, #1b1f24); font: inherit; font-size: 16px; }
+.champ input:focus-visible, .champ select:focus-visible { outline: 2px solid var(--accent, #2b5fc4); outline-offset: 2px; }
+
+.identite { display: flex; align-items: center; gap: 12px; }
+.visage { display: inline-flex; align-items: center; justify-content: center; flex: none; border-radius: 50%; overflow: hidden; background: var(--surface-muted, #eef0f3); color: var(--text-secondary, #46505b); font-weight: 600; }
+.visage img { width: 100%; height: 100%; object-fit: cover; }
+.exemple { margin: 0; padding: 12px 14px; border-radius: 12px; background: var(--surface-muted, #eef0f3); font-size: 15px; line-height: 1.4; }
+.exemple small { display: block; color: var(--text-muted, #5a6470); font: var(--type-caps, 600 12px/1.3 system-ui, sans-serif); letter-spacing: 0.06em; text-transform: uppercase; }
+.rang { display: flex; flex-wrap: wrap; gap: 8px; }
+.danger { border: 1px solid var(--danger, #a8153f); border-radius: 14px; padding: 12px 16px; }
+.danger summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; color: var(--danger, #a8153f); font-weight: 600; }
+
+/* Le menu des agents : une couche par-dessus la page. */
+.couche { position: fixed; inset: 0; z-index: 30; overflow-y: auto; background: var(--background, #f6f7f9); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ligneBouton, .plein, .bouton, .retour, .choix button { transition: none; }
+  .plein:active:not(:disabled) { transform: none; }
+}

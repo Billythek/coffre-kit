@@ -1,0 +1,66 @@
+# Formulaire de proposition d'un thème (GitHub « issue form »), à poser dans le dépôt PUBLIC du kit : .github/ISSUE_TEMPLATE/proposer-un-theme.yml
+# Rien n'est exécuté ici : la proposition est un LIEN.
+name: Proposer un thème pour Coffre
+description: Tu as fait un thème complet (les 10 pages) avec le kit ? Dis-nous où le trouver. Nous le relisons avant qu'il paraisse.
+title: "Thème : "
+labels: ["reçu"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Merci ! Ton thème est relu par l'équipe Coffre avant de paraître dans la communauté, gratuitement. Tu auras une réponse ici, sous quelques semaines : « en relecture », puis « accepté » (avec la version de Coffre où il paraît) ou « refusé » (avec les raisons, une par ligne).
+        **Ce que tu écris ici est public** : cette issue est visible par tout le monde, avec ton nom (ou pseudo), ton lien, l'adresse de ton dépôt et tes captures. N'y mets rien de privé.
+        Nous ne publions que le code exact que nous avons relu (l'empreinte du commit ci-dessous), jamais un lien qui peut changer après.
+  - type: input
+    id: nom
+    attributes: {label: Nom du thème, description: "En minuscules, sans espace (ex. aurore)", placeholder: aurore}
+    validations: {required: true}
+  - type: input
+    id: auteur
+    attributes: {label: Ton nom (ou pseudo) tel qu'il sera affiché, placeholder: Camille Martin}
+    validations: {required: true}
+  - type: input
+    id: lien-auteur
+    attributes: {label: Un lien vers toi (site, profil), description: "Facultatif, affiché avec ton nom"}
+  - type: input
+    id: depot
+    attributes: {label: Adresse de ton dépôt, description: "Le dépôt qui contient ton thème (public, ou nous donnons un accès en lecture)", placeholder: "https://github.com/toi/mon-theme"}
+    validations: {required: true}
+  - type: input
+    id: empreinte
+    attributes: {label: Empreinte du commit à relire (40 caractères), description: "Nous relisons ce commit et seulement lui", placeholder: "0123456789abcdef0123456789abcdef01234567"}
+    validations: {required: true}
+  - type: input
+    id: contrat
+    attributes: {label: Version du contrat (du kit) utilisée, placeholder: "1.0"}
+    validations: {required: true}
+  - type: dropdown
+    id: licence
+    attributes:
+      label: Licence
+      description: "Elle nous autorise à publier ton thème gratuitement dans Coffre et à le garder tant qu'il paraît."
+      options: [MIT, Apache-2.0, BSD-3-Clause, "Autre (écris-la dans le champ « Si tu as choisi Autre » plus bas)"]
+    validations: {required: true}
+  - type: textarea
+    id: licence-autre
+    attributes: {label: "Si tu as choisi « Autre » : le texte de ta licence, ou son lien", description: "Laisse vide si tu as choisi MIT, Apache-2.0 ou BSD-3-Clause."}
+    validations: {required: false}
+  - type: textarea
+    id: captures
+    attributes: {label: Captures des 10 pages (clair et sombre), description: "Glisse tes images ici. Nous refaisons les nôtres sur la donnée de démonstration avant de les montrer."}
+    validations: {required: true}
+  - type: textarea
+    id: description
+    attributes: {label: En deux phrases, ce qui rend ton thème unique}
+    validations: {required: true}
+  - type: checkboxes
+    id: engagements
+    attributes:
+      label: Je confirme
+      options:
+        - {label: "Mon thème a les 10 pages (pas une seule)", required: true}
+        - {label: "Mes vues ne lisent et n'écrivent rien chez l'agent : elles reçoivent tout par les modèles du kit", required: true}
+        - {label: "Je n'ai mis aucune clé, aucun identifiant ni aucune donnée de personne dans le dépôt", required: true}
+        - {label: "Mon thème passe `npm run types` et `node outils/controler-theme.mjs <id>` sans faute", required: true}
+        - {label: "Le code est de moi (ou j'ai le droit de le proposer) et je suis d'accord pour qu'il paraisse gratuitement", required: true}
+        - {label: "Je suis d'accord que l'équipe Coffre le compile et l'adapte au besoin dans Coffre (types, bancs, petits ajustements pour qu'il tienne dans l'application), et le garde tant qu'il paraît", required: true}

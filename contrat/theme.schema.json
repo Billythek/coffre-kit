@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "theme.json d'un thème de la communauté Coffre",
+  "description": "La fiche d'un thème de la Communauté Coffre : un dossier de thème contient ce fichier. Source unique du choix de thème dans Coffre et de la page de la communauté. `origine` dit ce que nous avons relu, et d'où.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "nom",
+    "auteur",
+    "licence",
+    "version",
+    "contrat",
+    "pages",
+    "polices",
+    "apercu",
+    "captures",
+    "origine",
+    "empreinteRelue",
+    "dateRelecture"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]{1,24}$",
+      "description": "Nom du dossier = suffixe des fichiers style-<id>.ts et style-<id>-pages.ts. Jamais classique, point, carte, bureau."
+    },
+    "nom": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 40,
+      "description": "Nom public montré dans le choix du thème."
+    },
+    "auteur": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "nom"
+      ],
+      "properties": {
+        "nom": {
+          "type": "string",
+          "maxLength": 60
+        },
+        "lien": {
+          "type": "string",
+          "pattern": "^https://"
+        }
+      }
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120,
+      "description": "Une phrase, 120 caractères au plus."
+    },
+    "licence": {
+      "type": "string",
+      "enum": [
+        "MIT",
+        "Apache-2.0",
+        "BSD-3-Clause",
+        "autre"
+      ]
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Version du thème (x.y.z)."
+    },
+    "contrat": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+(\\.\\d+)?$",
+      "description": "Version du contrat de données du kit (un seul mot, « contrat »)."
+    },
+    "pages": {
+      "type": "array",
+      "minItems": 10,
+      "items": {
+        "type": "string",
+        "enum": [
+          "accueil",
+          "travail",
+          "catalogue",
+          "savoir",
+          "personnalite",
+          "routines",
+          "routine",
+          "programmer",
+          "reglages",
+          "connexions",
+          "agents",
+          "nouvel-agent",
+          "compte"
+        ]
+      },
+      "description": "Les 10 pages accueil, travail, catalogue, savoir, personnalite, routines, programmer, reglages, agents, compte sont obligatoires (requisItems) ; optionnelles : routine, connexions, nouvel-agent (repli Classique aux couleurs du thème). L'en-tête (`entete`) reste celui de Coffre : un thème ne le fournit pas.",
+      "requisItems": [
+        "accueil",
+        "travail",
+        "catalogue",
+        "savoir",
+        "personnalite",
+        "routines",
+        "programmer",
+        "reglages",
+        "agents",
+        "compte"
+      ]
+    },
+    "polices": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^polices/[a-z0-9._-]+\\.(woff|woff2)$"
+      },
+      "description": "Polices apportées dans le paquet, RELUES PAR NOUS (le kit avertit « licence à relire » et refuse tout @font-face dans le CSS du thème : c'est Coffre qui sert les polices après relecture, via les jetons)."
+    },
+    "apercu": {
+      "type": "string",
+      "pattern": "^[a-z0-9._/-]+\\.webp$",
+      "description": "Vignette du choix du thème."
+    },
+    "captures": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9._/-]+\\.(webp|png)$"
+      },
+      "description": "NOS captures (clair et sombre) sur la donnée de démonstration, jamais de donnée réelle."
+    },
+    "origine": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "depot",
+        "commit"
+      ],
+      "properties": {
+        "depot": {
+          "type": "string",
+          "pattern": "^https://"
+        },
+        "commit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        }
+      },
+      "description": "Le dépôt du créateur et le commit exact que nous avons relu et copié."
+    },
+    "empreinteRelue": {
+      "type": "object",
+      "minProperties": 1,
+      "patternProperties": {
+        "^[A-Za-z0-9._/-]+$": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "additionalProperties": false,
+      "description": "sha256 de chaque fichier du dossier, posé par nous après relecture."
+    },
+    "dateRelecture": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "versionCoffre": {
+      "type": "string",
+      "description": "Premier commit de Coffre où il paraît (rempli à l'intégration)."
+    }
+  }
+}

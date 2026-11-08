@@ -1,0 +1,12 @@
+{
+  "id": "exemple",
+  "nom": "Exemple",
+  "description": "Le thème d'exemple du kit : sobre, gris-bleu, un seul accent.",
+  "auteur": { "nom": "Équipe Coffre", "lien": "https://github.com/Billythek/coffre-kit" },
+  "licence": "MIT",
+  "version": "1.0.0",
+  "contrat": "1.0",
+  "pages": ["accueil", "travail", "catalogue", "savoir", "personnalite", "routines", "programmer", "reglages", "agents", "compte"],
+  "polices": [],
+  "apercu": "apercu.webp"
+}
